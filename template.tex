@@ -1,0 +1,71 @@
+\documentclass{article}
+% General document formatting
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% Related to math
+% \usepackage{amsmath,amssymb,amsfonts,amsthm}
+\pagenumbering{gobble}
+
+
+\begin{document}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\noindent\begin{tabularx}{\textwidth}{XR}
+  \includegraphics[width=3cm]{./logo.jpg} & <% if !@report["logo_clinica"].nil? %>\includegraphics[width=3cm]{./<%= @report["logo_clinica"]%>.jpg}<% end %> \\
+\end{tabularx}
+
+
+\begin{center}
+  {\huge\textbf{<%= @report["tipo"] %>}}
+\end{center}
+
+\renewcommand{\arraystretch}{1.8}
+\noindent\begin{tabularx}{\textwidth}{|XX|XX|}
+  \hline
+  \textbf{Paciente}           & <%= @report["paciente"] %>  & \textbf{Especie} & <%= @report["especie"] %> \\
+  \hline
+  \textbf{Ficha}              & <%= @report["ficha"] %>  & \textbf{Edad}    & <%= @report["edad"] %> \\
+  \hline
+  \textbf{Tutor}              & <%= @report["tutor"] %>  & \textbf{Sexo}    & <%= @report["sexo"] %> \\
+  \hline
+  \textbf{Médico solicitante} & <%= @report["medico"] %>  & \textbf{Estudio} & <%= @report["estudio"] %> \\
+  \hline
+\end{tabularx}
+\renewcommand{\arraystretch}{1}
+<% if !@report["antecedentes"].nil? %>
+\textbf{Antecedentes:} <%= @report["antecedentes"] %>
+<% end %>
+
+\section*{Descripción}
+<%= @report["desc"] %>
+
+\section*{Conclusiones}
+<%= @report["conc"] %>
+
+\vfill
+
+\begin{figure}[h]
+\noindent Atte.
+  \begin{flushright}
+\includegraphics[width=3cm]{./firma.jpg} \\
+Pia Chang \\
+Médico Veterinario \\
+Diploma en imagenología
+\end{flushright}
+<%= @report["date"] %>
+\end{figure}
+
+\renewcommand{\arraystretch}{4}
+<% @images.each do |i| %>
+\noindent\begin{tabularx}{\textwidth}{XR}
+  \includegraphics[width=8.5cm,trim={85px 45px 45px 25px},clip]{./<%= i[0] %>} & <% if !i[1].nil? %>\includegraphics[width=8.5cm,trim={85px 45px 45px 25px},clip]{./<%= i[1] %>}<% end %> \\
+\end{tabularx}
+<% end %>
+\renewcommand{\arraystretch}{1}
+
+\end{document}
