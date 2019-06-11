@@ -1,9 +1,8 @@
 require 'erb'
 require 'yaml'
 require 'date'
-require 'byebug'
 
-files_path ||= "example"
+files_path = ARGV[0] || "example"
 
 
 @report = YAML.load(File.read("#{files_path}/informe.yaml", encoding: "UTF-8"))
