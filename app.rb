@@ -25,4 +25,8 @@ latex_file = "#{@report["paciente"]}_#{Date.today}"
 File.write("#{files_path}/#{latex_file}.tex", result)
 puts files_path
 
-`cd '#{files_path}' && pdflatex #{latex_file}.tex && open #{latex_file}.pdf`
+`cd '#{files_path}' && \ 
+pdflatex #{latex_file}.tex && \
+open #{latex_file}.pdf && \
+rm *.log *.aux  
+`
