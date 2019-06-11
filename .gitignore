@@ -1,3 +1,5 @@
 result.*
 textput.log
 .byebug_history
+template.*
+!template.tex

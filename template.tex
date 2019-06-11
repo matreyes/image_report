@@ -16,7 +16,7 @@
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
 
 \noindent\begin{tabularx}{\textwidth}{XR}
-  \includegraphics[width=3cm]{./logo.jpg} & <% if !@report["logo_clinica"].nil? %>\includegraphics[width=3cm]{./<%= @report["logo_clinica"]%>.jpg}<% end %> \\
+  \includegraphics[width=3cm]{<%= Dir.pwd %>/logo.jpg} & <% if !@report["logo_clinica"].nil? %>\includegraphics[width=3cm]{<%= Dir.pwd + "/" + @report["logo_clinica"] %>.jpg}<% end %> \\
 \end{tabularx}
 
 
@@ -52,7 +52,7 @@
 \begin{figure}[h]
 \noindent Atte.
   \begin{flushright}
-\includegraphics[width=3cm]{./firma.jpg} \\
+\includegraphics[width=3cm]{<%= Dir.pwd %>/firma.jpg} \\
 Pia Chang \\
 Médico Veterinario \\
 Diploma en imagenología
@@ -63,7 +63,7 @@ Diploma en imagenología
 \renewcommand{\arraystretch}{4}
 <% @images.each do |i| %>
 \noindent\begin{tabularx}{\textwidth}{XR}
-  \includegraphics[width=8.5cm,trim={85px 45px 45px 25px},clip]{./<%= i[0] %>} & <% if !i[1].nil? %>\includegraphics[width=8.5cm,trim={85px 45px 45px 25px},clip]{./<%= i[1] %>}<% end %> \\
+  \includegraphics[width=8.5cm,trim={85px 45px 45px 25px},clip]{<%= i[0] %>} & <% if !i[1].nil? %>\includegraphics[width=8.5cm,trim={85px 45px 45px 25px},clip]{./<%= i[1] %>}<% end %> \\
 \end{tabularx}
 <% end %>
 \renewcommand{\arraystretch}{1}
