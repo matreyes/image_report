@@ -2,9 +2,9 @@ require 'erb'
 require 'yaml'
 require 'date'
 
-files_path = ARGV[0] || "example"
+files_path = ARGV[0]
 
-@report = YAML.load(File.read("#{files_path}/informe.yaml", encoding: "UTF-8"))
+@report = YAML.load(File.read("#{files_path}/informe.yml", encoding: "UTF-8"))
 
 @report["desc"] = @report["desc"].gsub(/^(.+)\:/, '\textbf{\1}:')
 
@@ -25,8 +25,7 @@ latex_file = "#{@report["paciente"]}_#{Date.today}"
 File.write("#{files_path}/#{latex_file}.tex", result)
 puts files_path
 
-`cd '#{files_path}' && \ 
+`cd '#{files_path}' && \
 pdflatex #{latex_file}.tex && \
 open #{latex_file}.pdf && \
-rm *.log *.aux  
-`
+rm *.log *.aux`

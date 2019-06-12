@@ -1,0 +1,13 @@
+logo_clinica: <%= clinic %>
+tipo: <%= type_complete %>
+paciente: <%= pacient.capitalize %>
+ficha: 
+tutor: 
+medico: 
+especie: <%= specie %>
+edad: 1 año
+sexo: <%= specie %>
+estudio: <%= study_complete %>
+date: 11 de junio de 2019
+antecedentes: 
+<%= study_partial %>
