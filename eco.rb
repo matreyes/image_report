@@ -5,6 +5,8 @@ require 'tty-prompt'
 require 'fileutils'
 require 'securerandom'
 
+REPORTS_PATH = "/Users/matreyes/Desktop/informes 2/"
+
 CLINICAS = [
   { name: 'Trinidad', value: "trinidad" },
   { name: 'Cemvet', value: "cemvet" },
@@ -21,15 +23,13 @@ prompt = TTY::Prompt.new
 
 pacient = prompt.ask('Nombre del paciente:')
 
-folder_name = pacient + "_" +Date.today.strftime("%y%m%d") + "_" + SecureRandom.hex(1)
+folder_name = pacient.downcase + "_" +Date.today.strftime("%y%m%d") + "_" + SecureRandom.hex(1)
 
 clinic = prompt.enum_select("Seleccione la clínica:", CLINICAS)
 
 specie = prompt.select("Seleccione especie:", %w{Canino Felino})
 
 sex = prompt.select("Seleccione sexo:", %w{Macho Hembra})
-
-clinic = prompt.enum_select("Seleccione la clínica:", CLINICAS)
 
 type = prompt.select("Seleccione el tipo", %w{eco rx})
 type_complete = type == "rx" ? "Informe Radiográfico" : "Informe Ecográfico"
@@ -53,7 +53,10 @@ else
 end
 study_complete = study.tr("torax", "tórax").tr("craneo", "cráneo").capitalize
 
-template = File.read("./yamls/base.yaml", encoding: "UTF-8")
+template = File.read("./yamls/base.yml", encoding: "UTF-8")
+study_partial = File.read("./yamls/#{type}/#{study}.yml", encoding: "UTF-8")
 result = ERB.new(template).result(binding)
 
-FileUtils.mkdir folder_name
+path = REPORTS_PATH + folder_name
+FileUtils.mkdir path
+File.write("#{path}/informe.yml", result)
