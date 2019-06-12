@@ -1,6 +1,7 @@
 require 'erb'
 require 'yaml'
 require 'date'
+require 'active_support/inflector'
 
 files_path = ARGV[0]
 
@@ -21,7 +22,8 @@ end
 template = File.read("./template.tex", encoding: "UTF-8")
 
 result = ERB.new(template).result(binding)
-latex_file = "#{@report["paciente"]}_#{Date.today}"
+paciente = @report["paciente"].parameterize
+latex_file = "#{paciente}_#{Date.today}"
 File.write("#{files_path}/#{latex_file}.tex", result)
 puts files_path
 

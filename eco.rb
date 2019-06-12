@@ -4,8 +4,9 @@ require 'date'
 require 'tty-prompt'
 require 'fileutils'
 require 'securerandom'
+require 'active_support/inflector'
 
-REPORTS_PATH = "/Users/matreyes/Desktop/informes 2/"
+REPORTS_PATH = ENV['REPORTS_PATH'] || "/Users/matreyes/Desktop/informes 2/"
 
 CLINICAS = [
   { name: 'Trinidad', value: "trinidad" },
@@ -47,7 +48,7 @@ pacient = prompt.ask('Nombre del paciente:')
 
 age = prompt.ask('Edad:')
 
-folder_name = pacient.downcase + "_" + Date.today.strftime("%d%m%y") + "_" + SecureRandom.hex(1)
+folder_name = pacient.parameterize + "_" + Date.today.strftime("%d%m%y") + "_" + SecureRandom.hex(1)
 
 clinic = prompt.enum_select("Seleccione la clínica:", CLINICAS)
 
