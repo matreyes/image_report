@@ -16,6 +16,28 @@ CLINICAS = [
   { name: 'Otra', value: nil }
 ]
 
+MESES = %w{
+-
+enero
+febrero
+marzo
+abril
+mayo
+junio
+julio
+agosto
+septiembre
+octubre
+noviembre
+diciembre
+}
+
+beauty_day = Date.today.strftime("%d") +
+  " de " +
+  MESES[Date.today.strftime("%m").to_i] +
+  " de " +
+  Date.today.strftime("%Y")
+ 
 
 SecureRandom.hex(4)
 
@@ -23,7 +45,9 @@ prompt = TTY::Prompt.new
 
 pacient = prompt.ask('Nombre del paciente:')
 
-folder_name = pacient.downcase + "_" +Date.today.strftime("%y%m%d") + "_" + SecureRandom.hex(1)
+age = prompt.ask('Edad:')
+
+folder_name = pacient.downcase + "_" + Date.today.strftime("%d%m%y") + "_" + SecureRandom.hex(1)
 
 clinic = prompt.enum_select("Seleccione la clínica:", CLINICAS)
 
@@ -51,7 +75,7 @@ else
     muscular
     abdomen})
 end
-study_complete = study.tr("torax", "tórax").tr("craneo", "cráneo").capitalize
+study_complete = study.gsub("torax", "tórax").gsub("craneo", "cráneo").capitalize
 
 template = File.read("./yamls/base.yml", encoding: "UTF-8")
 study_partial = File.read("./yamls/#{type}/#{study}.yml", encoding: "UTF-8")
@@ -60,3 +84,5 @@ result = ERB.new(template).result(binding)
 path = REPORTS_PATH + folder_name
 FileUtils.mkdir path
 File.write("#{path}/informe.yml", result)
+
+`open '#{path}'`

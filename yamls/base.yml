@@ -5,9 +5,9 @@ ficha:
 tutor: 
 medico: 
 especie: <%= specie %>
-edad: 1 año
-sexo: <%= specie %>
+edad: <%= age %>
+sexo: <%= sex %>
 estudio: <%= study_complete %>
-date: 11 de junio de 2019
+date: <%= beauty_day %>
 antecedentes: 
 <%= study_partial %>
