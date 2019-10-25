@@ -14,6 +14,7 @@ CLINICAS = [
   { name: 'Clinicat', value: "clinicat" },
   { name: 'Triviño', value: "trivino" },
   { name: 'Almanimal', value: "almanimal" },
+  { name: 'Macul', value: "macul" },
   { name: 'Otra', value: nil }
 ]
 
